@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            XKCD
+        </title>
+    </head>
+    <body>
+        <p>Current Comic</p>
+        <div id="comic">No comic</div>
+    </body>
+    
+    <script>
+        var myurl = "https://xkcd.vercel.app/?comic=latest";
+        console.log(myurl);
+        /*global fetch*/
+        fetch(myurl, {mode: 'cors'})
+            .then(function(response) {
+                console.log(response);
+                return response.json();
+            }) .then(function(json) {
+                console.log("This is the json");
+                console.log(json);
+                const alt = document.createTextNode(json["alt"]);
+                const img = document.createElement("img");
+                img.src = json["img"];
+                const container = document.getElementById("comic");
+                container.textContent = "";
+                container.appendChild(alt);
+                container.appendChild(img);
+            });
+            
+  /*      var myurl = "https://xkcd.vercel.app/?comic=latest";
+        console.log(myurl);
+        /*global fetch
+        fetch(myurl, {mode: 'cors'})
+            .then(function(response) {
+              console.log(response);
+              return response.json();
+            }).then(function(json) {
+              console.log("This is the json");
+              console.log(json);
+              const alt = document.createTextNode(json["alt"]);
+              const container = document.getElementById("comic");
+              container.textContent = "";
+              container.appendChild(alt);
+            }); */
+    </script>
+</html>
